@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Order</title>
+</head>
+<style>
+  .blue-button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color:orangered; /* Blue color */
+        color: #fff; /* Text color */
+        text-decoration: none; /* Remove underlines for links */
+        border: none;
+        border-radius: 5px;
+    }
+
+    .blue-button:hover {
+        background-color:green; /* Darker blue on hover */
+    } 
+    .red-button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color:rgba(0, 174, 255, 0.945); /* Blue color */
+        color: #fff; /* Text color */
+        text-decoration: none; /* Remove underlines for links */
+        border: none;
+        border-radius: 5px;
+    }
+
+    .red-button:hover {
+        background-color:red; /* Darker blue on hover */}
+  h1 {
+    color:indianred;
+  } 
+  .total-price {
+    color: green; /* Change the text color to green or any color you prefer */
+    font-size: 30px; /* Increase the font size for emphasis */
+}
+  form{
+display: block;
+padding: 5px 10px;
+color:lightseagreen;
+font-size:large;
+border:burlywood;
+border-radius: 5px;
+  }
+  .footer {
+          background-color: #333;
+          color: #fff;
+          padding: 20px;
+          text-align: center;
+        }
+</style>
+<body>
+    <h1>Complete Order</h1>
+    <form method="post">
+      <h2>Your Items for Order:</h2>
+      <ul>
+        {% for commodity in selected_items %}
+            <li>{{ commodity.name }} - Price: Ksh.{{ commodity.price }}</li>
+        {% endfor %}
+    </ul>
+    
+    <div class="total-price">
+      <p>Total Price: Ksh.{{ total_price }}</p>
+  </div>
+  
+    <p>N/B Confirm Item(s) and Price(s) before placing Order</p>
+        {% csrf_token %}
+        {{ form.as_p }} 
+        <input type="submit" class="blue-button" value="Place Order">
+    </form>
+    <p><a href="{% url 'home'%}" class="red-button">Cancel and Go Home</a></p>
+    <div class="footer">
+      <p>&copy; 2023.Elite Home-Store.For inquiries call:+254115427807|All rights reserved.</p>
+    </div>
+</body>
+</html>
+

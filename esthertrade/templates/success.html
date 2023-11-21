@@ -1,0 +1,27 @@
+<style>
+    .blue-button {
+          display: inline-block;
+          padding: 10px 20px;
+          background-color:blueviolet; /* Blue color */
+          color: #fff; /* Text color */
+          text-decoration: none; /* Remove underlines for links */
+          border: none;
+          border-radius: 5px;
+      }
+  
+      .blue-button:hover {
+          background-color:darkcyan; /* Darker blue on hover */
+      } 
+      .footer {
+          background-color: #333;
+          color: #fff;
+          padding: 20px;
+          text-align: center;
+        }  
+  </style>
+<h1><center>Your order has been placed successfully...</center></h1>
+<p><center>Please wait as we proccess yor order for delivery or pick up!<br>You'll be contacted soon for more details. Thank you for shopping at Elite-Home Store</center></p>
+<a href="{% url 'home' %}"class="blue-button">Go to Homepage</a>
+<div class="footer">
+    <p>&copy; 2023.Elite Home-Store.For inquiries call:+254115427807|All rights reserved.</p>
+  </div>

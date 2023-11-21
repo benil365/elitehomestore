@@ -1,0 +1,35 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.image-container {
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+}
+
+.scrollable {
+    display: inline-block;
+    white-space: nowrap;
+}
+
+img {
+    max-width: 200px;
+    margin-right: 10px;
+}
+
+.selected-items {
+    margin-top: 20px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin: 5px 0;
+    cursor: pointer;
+}

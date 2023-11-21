@@ -1,0 +1,191 @@
+{%extends 'base.html'%}
+{%block content%}
+{% load static %}
+<html>
+<title>Home-Store</title>
+<h1><center>Welcome to Elite-Home Store</center></h1>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commodities</title>
+    <style>
+        /* Add CSS styles to control the horizontal display */
+        .commodity-container {
+            display: flex;
+            flex-wrap: wrap;
+            overflow-x: auto; /* Enable horizontal scrolling */
+        }
+
+        .commodity {
+            flex: 0 0 calc(20% - 45px); /* 10% width with margin between items */
+            max-width: 400px;
+            margin-right: 20px;
+            margin-bottom: 20px; /* Add some space between rows */
+        }
+
+        .commodity img {
+            width: 250px; /* Images of the same size */
+            height:250px; /* Maintain aspect ratio */
+            box-sizing:content-box;
+        }
+
+        .category-container {
+            display: flex;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .category {
+            flex: 0 0 auto;
+            max-width: 25%;
+            margin-right: 20px;
+        }
+
+        .category h2 {
+            margin-bottom: 10px;
+        }
+        .blue-button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #007bff; /* Blue color */
+        color: #fff; /* Text color */
+        text-decoration: none; /* Remove underlines for links */
+        border: none;
+        border-radius: 5px;
+       
+    }
+    .grey-button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color:chocolate; /* Blue color */
+        color: #fff; /* Text color */
+        text-decoration: none; /* Remove underlines for links */
+        border: none;
+        border-radius: 5px;
+    }
+
+    .grey-button:hover {
+        background-color:red; /* Darker blue on hover */}
+
+    .blue-button:hover {
+        background-color:greenyellow; /* Darker blue on hover */
+    }
+    .red-button{
+        display: inline-block;
+        padding: 10px 20px;
+        background-color:goldenrod; /* gold color */
+        color: #fff; /* Text color */
+        text-decoration: none; /* Remove underlines for links */
+        border: none;
+        border-radius: 5px;
+        
+    }
+    .red-button:hover{
+        background-color:greenyellow;
+    }
+    p{
+ color:black;
+    }
+    .fa {  
+  padding: 20px;  
+text-align: center;  
+  margin: 5px 2px;  
+  font-size: 30px;  
+  width: 50px;  
+}  
+.fa-facebook {  
+  background: #3B5998;  
+  color: white;  
+}  
+.fa-twitter {  
+  background: #55ACEE;  
+  color: white;  
+}  
+.fa-pinterest {  
+  background: #cb2027;  
+  color: white;  
+}  
+.fa-linkedin {  
+  background: #007bb5;  
+  color: white;  
+}  
+.fa-instagram {  
+  background: #125688;  
+  color: white;  
+}  
+    h3{
+        color:aliceblue;
+        background-color: rgba(0, 0, 0, 0.473);
+        display: inline-block;
+        padding:20px;
+        text-wrap:balance;
+
+    }
+    .footer {
+          background-color: #333;
+          color: #fff;
+          padding: 20px;
+          text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h3>We have all that you need!! Starting from household items to your personalised items!.<b>To order for one; just Contact us at:</b> <a href="mailto:elitetraders.orders@gmail.com">elitetraders.orders@gmail.com</a><br>
+        Or Call Us: <a href="tel:0796610558">+254796610558</a></h3>  
+        <p> You can also reach reach us on the following social media platforms <a href="#" class="fa fa-facebook"></a>  
+            <a href="#" class="fa fa-twitter"></a>  
+            <a href="#" class="fa fa-linkedin"></a>  
+            <a href="#" class="fa fa-instagram"></a>  
+    <div class="commodity-container">
+        {% for commodity in commodities %}
+            <div class="commodity">
+                <img src="{{ commodity.image.url }}" alt="{{ commodity.name }}">
+                <h3>{{ commodity.name }}</h3>
+                <p>{{ commodity.description }}</p>
+                <p>Price: Ksh.{{ commodity.price }}</p>
+                <a href="{% url 'add_item' commodity.name %}"class="red-button">Add to Cart</a>
+                <!-- Add more information here -->
+            </div>
+        {% endfor %}
+
+        {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+       
+        <div class="order-sidebar" id="order-sidebar" style="display: none;">  <!-- Initially hidden -->
+            <h5>Your Selected Items (filterd by order of selection latest):</h5>
+        <ul>
+    <!-- Loop through and display selected items from the session -->
+        {% for item_id in request.session.selected_items %}
+        {% with commodity=selected_commodities.item_id %}
+            <li>
+                <h3>{{ commodity.name }}</h3>
+                <p>Price: Ksh.{{ commodity.price }}</p> 
+                <a href="{% url 'remove_item' item_id %}"class="grey-button">Remove item from Cart</a>
+            </li>
+        {% endwith %}
+                {% endfor %}
+            </ul>
+            <p><a href="{% url 'home'%}" class="blue-button">Add item</a></p>
+            <p>To make Order of selected Items click Here >>><a href="{% url 'order_details'%}" class="blue-button">View your Cart</a></p>
+        </div>
+    </div>
+    <script>
+        // Check if there are selected items, and show the sidebar if there are any
+        if ({{ request.session.selected_items|length }} > 0) {
+            document.getElementById("order-sidebar").style.display = "block";
+        }
+    </script>
+<h4>To make an Order for an item(s) that is not listed on this website or to request for more dteails .Kindly contact us through <a href="tel:0796610558">+254796610558</a></h4>
+<div class="footer">
+    <p>&copy; 2023.Elite Home-Store.For inquiries call:+254115427807|All rights reserved.</p>
+  </div>
+</body>
+</html>
+{% endblock content %}
