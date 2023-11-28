@@ -6,7 +6,7 @@ from .views import SubmitOrder, create_order,order_view,home_view, select_items,
 urlpatterns = [
     path('', home_view, name='home'),
     path('add_item/<str:item_name>/', select_items, name='add_item'),
-    path('remove_item/<int:item_name>/', remove_selected_item, name='remove_item'), 
+    path('remove_item/<str:item_name>/', remove_selected_item, name='remove_item'), 
     path("success", SubmitOrder.as_view(), name="success"),
     path("details/",create_order, name="order_details"),
     path('orders/', order_view, name='order_view'),

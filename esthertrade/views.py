@@ -112,12 +112,18 @@ def create_order(request):
     return render(request, 'order.html', {'selected_items': selected_items, 'total_price': total_price, 'form': form})
 
 def remove_selected_item(request, item_name):
+    commodity = get_object_or_404(Commodity, name=item_name)
     selected_items = request.session.get('selected_items', [])
-    selected_items = [item for item in selected_items if item_name != item_name]
-    # Update the session with the modified selected items
+    
+    # Remove the commodity ID from selected_items instead of its name
+    selected_items = [item_id for item_id in selected_items if item_id != commodity.id]
+    
     request.session['selected_items'] = selected_items
-    request.session.modified 
-    return HttpResponse("Item removed successfully")
+    request.session.modified = True
+    
+    # Redirect back to the page where items are displayed (e.g., home_view or any relevant view)
+    return redirect('home')  # Adjust this redirection as per your application flow
+
   
 
 
