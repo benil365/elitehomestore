@@ -145,6 +145,7 @@ text-align: center;
                 <p>{{ commodity.description }}</p>
                 <p>Price: Ksh.{{ commodity.price }}</p>
                 <a href="{% url 'add_item' commodity.name %}"class="red-button">Add to Cart</a>
+                <a href="{% url 'order_details'%}" class="blue-button">View your Cart</a>
                 <!-- Add more information here -->
             </div>
         {% endfor %}
@@ -157,7 +158,6 @@ text-align: center;
     </ul>
 {% endif %}
 
-       
 <div class="order-sidebar" id="order-sidebar" style="display: none;">
     <h5>Your Selected Items (filtered by order of selection latest):</h5>
     <ul>
@@ -171,6 +171,7 @@ text-align: center;
     <p>To make an order of selected items, click here: <a href="{% url 'order_details'%}" class="blue-button">View your Cart</a></p>
 </div>   
  </div>
+
     <script>
         // Check if there are selected items, and show the sidebar if there are any
         if ({{ request.session.selected_items|length }} > 0) {

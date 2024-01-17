@@ -1,3 +1,5 @@
+{%extends 'base.html'%}
+{%block content%}
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,7 +35,7 @@
     color:indianred;
   } 
   .total-price {
-    color: green; /* Change the text color to green or any color you prefer */
+    color: green; 
     font-size: 30px; /* Increase the font size for emphasis */
 }
   form{
@@ -52,12 +54,12 @@ border-radius: 5px;
         }
 </style>
 <body>
-    <h1>Complete Order</h1>
+    <h1>Complete your Order</h1>
     <form method="post">
-      <h2>Your Items for Order:</h2>
+      <h2>Items in your Order:</h2>
       <ul>
         {% for commodity in selected_items %}
-            <li>{{ commodity.name }} - Price: Ksh.{{ commodity.price }}</li>
+            <li>{{ commodity.name }} - Price: Ksh.{{ commodity.price }}</li><a href="{% url 'remove_item' commodity.name %}" class="grey-button">Remove item from Cart</a>
         {% endfor %}
     </ul>
     
@@ -76,4 +78,5 @@ border-radius: 5px;
     </div>
 </body>
 </html>
+{% endblock content %}
 

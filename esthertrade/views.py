@@ -51,7 +51,8 @@ def order_view(request):
 def home_view(request):
     commodities = Commodity.objects.all()
     order_items = OrderItem.objects.all()  # Get all order items
-    return render(request, 'home.html', {'commodities': commodities, 'order_items': order_items})
+    selected_items = request.session.get('selected_items', [])
+    return render(request, 'home.html', {'selected_items': selected_items,'commodities': commodities, 'order_items': order_items})
 
 
 def get_item_by_name(item_name):
@@ -120,9 +121,7 @@ def remove_selected_item(request, item_name):
     
     request.session['selected_items'] = selected_items
     request.session.modified = True
-    
-    # Redirect back to the page where items are displayed (e.g., home_view or any relevant view)
-    return redirect('home')  # Adjust this redirection as per your application flow
+    return redirect('order_details')  
 
   
 

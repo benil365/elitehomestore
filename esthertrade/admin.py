@@ -9,8 +9,8 @@ class UserAdmin(admin.ModelAdmin):
 @admin.register(Commodity)
 class CommodityAdmin(admin.ModelAdmin):
     list_display = ('image','name', 'price')
-    list_filter = ('name',)  # Add more filters as needed
-    search_fields = ('name',)  # Add more search fields as needed
+    list_filter = ('name',) 
+    search_fields = ('name',) 
 class OrderAdmin(admin.ModelAdmin):
     list_display = ['email', 'phone_no', 'ordered_at', 'delivery_fee', 'delivery_place', 'total_amount', 'formatted_commodities']
 
