@@ -15,6 +15,4 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Traders.settings")
 
 application = get_wsgi_application()
 
-from Traders.wsgi import TradersApplication
 
-application = TradersApplication(application)

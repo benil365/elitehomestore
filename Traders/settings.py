@@ -26,9 +26,9 @@ SECRET_KEY = get_random_secret_key()
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['elitehomestore.net', 'www.elitehomestore.net','197.248.5.26']
+ALLOWED_HOSTS = ['elitehomestore.net', 'www.elitehomestore.net','197.248.5.26','127.0.0.1']
 
 SECURE_HSTS_SECONDS = 3600  # Set HSTS header for 1 hour (adjust as needed)
 SECURE_SSL_REDIRECT = True
@@ -87,8 +87,12 @@ WSGI_APPLICATION = "Traders.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'EstherDB',
+        'USER': 'root',
+        'PASSWORD': '3931@Benil',
+        'HOST': 'localhost',  # or your MySQL host
+        'PORT': '3306',
         
     }
 }
